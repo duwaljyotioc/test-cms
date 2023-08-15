@@ -36,7 +36,7 @@ services:
     volumes:
       - ".:/app:rw"
   nginx:
-    build: ./nginx
+    image: nginx:1.15-alpine
     ports:
       - 80:80
       - 443:443
@@ -44,14 +44,14 @@ services:
       - web
       - certbot
     volumes:
-      - nginx_data:/var/lib/nginx/data
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
 
   certbot:
     image: certbot/certbot
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
-
 networks:
   djangocmsnet:
 
