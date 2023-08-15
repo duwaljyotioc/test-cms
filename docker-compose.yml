@@ -16,7 +16,6 @@ services:
     # the URL 'postgres' or 'mysql' will point to the application's db service
     networks:
       - djangocmsnet
-
     env_file: .env-local
 
   database_default:
@@ -29,10 +28,8 @@ services:
       POSTGRES_PASSWORD: "password"
       POSTGRES_HOST_AUTH_METHOD: "trust"
       SERVICE_MANAGER: "fsm-postgres"
-
     networks:
       - djangocmsnet
-
     volumes:
       - ".:/app:rw"
   nginx:
@@ -42,16 +39,9 @@ services:
       - 443:443
     depends_on:
       - web
-      - certbot
     volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+      - ./.docker/nginx:/etc/nginx/conf.d
 
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
 networks:
   djangocmsnet:
 
