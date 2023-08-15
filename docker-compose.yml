@@ -33,14 +33,11 @@ services:
     volumes:
       - ".:/app:rw"
   nginx:
-    image: nginx:1.15-alpine
+    build: ./nginx
     ports:
-      - 80:80
-      - 443:443
+      - 1337:80
     depends_on:
       - web
-    volumes:
-      - ./.docker/nginx:/etc/nginx/conf.d
 
 networks:
   djangocmsnet:
