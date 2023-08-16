@@ -35,7 +35,7 @@ services:
     volumes:
       - ".:/app:rw"
   nginx:
-    image: nginx:1.15-alpine
+    build: ./nginx
     ports:
       - 80:80
       - 443:443
