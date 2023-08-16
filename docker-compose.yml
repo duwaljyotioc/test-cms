@@ -47,6 +47,7 @@ services:
       - ./data/certbot/www:/var/www/certbot
     networks:
       - djangocmsnet
+    restart: "on-failure"
 
   certbot:
     image: certbot/certbot
